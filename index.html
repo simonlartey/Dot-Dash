@@ -38,11 +38,17 @@
         <div class="overlay" id="menu-overlay">
           <p class="overlay-heading">Ready?</p>
           <p class="overlay-copy">Click the dot as many times as you can before the timer runs out.</p>
+
+          <div class="mode-select" id="mode-select" role="radiogroup" aria-label="Difficulty mode"></div>
+          <p class="mode-hint" id="mode-hint"></p>
+
+          <p class="high-score">Best: <strong id="high-score">0</strong></p>
           <button class="button" id="start-button" type="button">Start</button>
         </div>
 
         <div class="overlay is-hidden" id="game-over-overlay">
           <p class="overlay-heading">Time's up!</p>
+          <p class="new-high is-hidden" id="new-high-badge">New high score! 🎉</p>
           <p class="overlay-copy">You scored <strong id="final-score">0</strong> points.</p>
           <button class="button" id="replay-button" type="button">Play again</button>
         </div>

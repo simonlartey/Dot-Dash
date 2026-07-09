@@ -1,9 +1,10 @@
-// Tunable constants — all feel-related numbers live here, not scattered in code.
-// Milestone 1 (MVP) keeps this small; the difficulty ramp lands in Milestone 2.
-// Tunable game settings. All difficulty values should live here instead of
-// being scattered throughout the game logic.
+// Tunable game settings. All difficulty and feel values should live here
+// instead of being scattered throughout the game logic.
 export const CONFIG = {
   roundSeconds: 30,
+
+  // Seconds remaining at which the timer switches to its low-time warning.
+  timerLowThreshold: 5,
 
   difficultyLevels: [
     {
@@ -23,4 +24,36 @@ export const CONFIG = {
       dotSize: 28,
     },
   ],
+
+  // Difficulty modes govern how a miss (clicking empty space) is handled.
+  // Penalties are whole seconds so they read cleanly on the integer countdown.
+  defaultModeId: 'casual',
+  modes: [
+    {
+      id: 'casual',
+      label: 'Casual',
+      description: 'Pure score chase — misses do nothing.',
+      missPenaltySeconds: 0,
+      missEndsGame: false,
+    },
+    {
+      id: 'classic',
+      label: 'Classic',
+      description: 'A miss costs you 2 seconds.',
+      missPenaltySeconds: 2,
+      missEndsGame: false,
+    },
+    {
+      id: 'sudden-death',
+      label: 'Sudden Death',
+      description: 'One miss ends the run.',
+      missPenaltySeconds: 0,
+      missEndsGame: true,
+    },
+  ],
+
+  storageKeys: {
+    highScore: 'dotdash.highScore',
+    mode: 'dotdash.mode',
+  },
 };

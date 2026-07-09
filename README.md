@@ -109,8 +109,9 @@ Dot-Dash/
 │   ├── dot.js        # dot spawn / move / hit-test
 │   ├── score.js      # scoring + high-score persistence
 │   ├── timer.js      # countdown logic
-│   └── config.js     # tunable constants (sizes, speeds, round length)
-├── assets/           # sounds, icons
+│   ├── sound.js      # Web Audio hit/miss tones (no asset files)
+│   └── config.js     # tunable constants (sizes, speeds, modes, round length)
+├── assets/           # icons
 └── README.md
 ```
 
@@ -118,26 +119,26 @@ Dot-Dash/
 
 ## 7. Build Roadmap
 
-### Milestone 0 — Skeleton
-- [ ] `index.html`, `styles.css`, module scaffolding
-- [ ] Static play area with a centered, non-interactive dot
+### Milestone 0 — Skeleton ✅
+- [x] `index.html`, `styles.css`, module scaffolding
+- [x] Static play area with a centered, non-interactive dot
 
-### Milestone 1 — Playable MVP
-- [ ] Click the dot to score `+1`
-- [ ] Dot relocates to a random in-bounds position on hit
-- [ ] 30-second countdown timer
-- [ ] Game-over screen with final score
-- [ ] Start / Replay flow
+### Milestone 1 — Playable MVP ✅
+- [x] Click the dot to score `+1`
+- [x] Dot relocates to a random in-bounds position on hit
+- [x] 30-second countdown timer
+- [x] Game-over screen with final score
+- [x] Start / Replay flow
 
-### Milestone 2 — The Ramp
-- [ ] Difficulty scaling (dot shrinks + moves faster with score)
-- [ ] Miss handling and difficulty modes (Casual / Classic / Sudden Death)
-- [ ] High-score persistence via localStorage
+### Milestone 2 — The Ramp ✅
+- [x] Difficulty scaling (dot shrinks with score) — the dot relocates on each hit, so relocation-*speed* scaling isn't applicable to this design
+- [x] Miss handling and difficulty modes (Casual / Classic / Sudden Death)
+- [x] High-score persistence via localStorage
 
-### Milestone 3 — Juice
-- [ ] Click feedback: scale/pop animation + sound
-- [ ] Timer-low warning state (color/pulse under 5s)
-- [ ] Menu screen with mode selection and high-score display
+### Milestone 3 — Juice ✅
+- [x] Click feedback: scale/pop animation + sound
+- [x] Timer-low warning state (color/pulse under 5s)
+- [x] Menu screen with mode selection and high-score display
 
 ### Milestone 4 — Polish & Ship
 - [ ] Full mobile/touch support and responsive layout

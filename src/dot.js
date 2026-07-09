@@ -26,10 +26,29 @@ export function createDot({ dotEl, playAreaEl }) {
     dotEl.style.top = `${Math.random() * maxY}px`;
   }
 
+  // Quick scale-pop for click feedback. Uses the Web Animations API so it
+  // retriggers cleanly on rapid hits; skipped when unsupported or when the
+  // player prefers reduced motion.
+  function pop() {
+    if (typeof dotEl.animate !== 'function') return;
+
+    const reduceMotion =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    dotEl.animate(
+      [{ transform: 'scale(1)' }, { transform: 'scale(1.25)' }, { transform: 'scale(1)' }],
+      { duration: 140, easing: 'ease-out' },
+    );
+  }
+
   return {
     show,
     hide,
     move,
     setSize,
+    pop,
   };
 }

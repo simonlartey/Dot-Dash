@@ -27,5 +27,17 @@ export function createTimer({ seconds, onTick, onComplete }) {
     }
   }
 
-  return { start, stop };
+  // Subtract time immediately (used by mode miss penalties). Ends the round if
+  // the penalty runs the clock out.
+  function penalize(penaltySeconds) {
+    remaining -= penaltySeconds;
+    onTick(remaining);
+
+    if (remaining <= 0) {
+      stop();
+      onComplete();
+    }
+  }
+
+  return { start, stop, penalize };
 }

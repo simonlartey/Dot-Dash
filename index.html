@@ -29,12 +29,23 @@
 
       <div class="play-area" id="play-area">
         <button
-          class="dot"
+          class="dot is-hidden"
           id="dot"
           type="button"
           aria-label="Game target"
-          disabled
         ></button>
+
+        <div class="overlay" id="menu-overlay">
+          <p class="overlay-heading">Ready?</p>
+          <p class="overlay-copy">Click the dot as many times as you can before the timer runs out.</p>
+          <button class="button" id="start-button" type="button">Start</button>
+        </div>
+
+        <div class="overlay is-hidden" id="game-over-overlay">
+          <p class="overlay-heading">Time's up!</p>
+          <p class="overlay-copy">You scored <strong id="final-score">0</strong> points.</p>
+          <button class="button" id="replay-button" type="button">Play again</button>
+        </div>
       </div>
     </section>
   </main>

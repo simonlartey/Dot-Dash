@@ -1,15 +1,20 @@
-// The dot: showing, hiding, and teleporting to a random in-bounds position.
+// The dot: showing, hiding, resizing, and teleporting to a random
+// in-bounds position.
 export function createDot({ dotEl, playAreaEl }) {
   function show() {
     dotEl.classList.remove('is-hidden');
-    move();
   }
 
   function hide() {
     dotEl.classList.add('is-hidden');
   }
 
-  // Teleport to a random spot fully inside the play area (never clipping edges).
+  function setSize(size) {
+    dotEl.style.width = `${size}px`;
+    dotEl.style.height = `${size}px`;
+  }
+
+  // Teleport to a random spot fully inside the play area.
   function move() {
     const area = playAreaEl.getBoundingClientRect();
     const size = dotEl.offsetWidth;
@@ -21,5 +26,10 @@ export function createDot({ dotEl, playAreaEl }) {
     dotEl.style.top = `${Math.random() * maxY}px`;
   }
 
-  return { show, hide, move };
+  return {
+    show,
+    hide,
+    move,
+    setSize,
+  };
 }

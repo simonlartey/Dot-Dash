@@ -17,24 +17,47 @@ export function createGame(refs) {
   } = refs;
 
   const dot = createDot({ dotEl, playAreaEl });
-  const score = createScore({ onChange: (value) => (scoreEl.textContent = value) });
+
+  const score = createScore({
+    onChange: updateScore,
+  });
+
   const timer = createTimer({
     seconds: CONFIG.roundSeconds,
-    onTick: (remaining) => (timerEl.textContent = remaining),
+    onTick: (remaining) => {
+      timerEl.textContent = remaining;
+    },
     onComplete: end,
   });
+
+  function getDifficultyLevel(currentScore) {
+    return CONFIG.difficultyLevels
+      .filter((level) => currentScore >= level.minimumScore)
+      .at(-1);
+  }
+
+  function updateScore(value) {
+    scoreEl.textContent = value;
+
+    const difficultyLevel = getDifficultyLevel(value);
+    dot.setSize(difficultyLevel.dotSize);
+  }
 
   function start() {
     menuOverlayEl.classList.add('is-hidden');
     gameOverOverlayEl.classList.add('is-hidden');
+
     score.reset();
     dot.show();
+    dot.move();
     timer.start();
   }
 
-  // A hit only counts while the dot is live (guards clicks after time runs out).
   function handleHit() {
-    if (dotEl.classList.contains('is-hidden')) return;
+    if (dotEl.classList.contains('is-hidden')) {
+      return;
+    }
+
     score.increment();
     dot.move();
   }
@@ -42,6 +65,7 @@ export function createGame(refs) {
   function end() {
     timer.stop();
     dot.hide();
+
     finalScoreEl.textContent = score.get();
     gameOverOverlayEl.classList.remove('is-hidden');
   }
